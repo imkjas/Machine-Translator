@@ -1,0 +1,14 @@
+pip install flask
+pip install translate
+
+translate package is an unofficial Google Translate API wrapper that doesn't rely on the TKK token. 
+
+https://cloud.google.com/translate/docs/languages
+
+Neural Machine Translation model
+The Translation API's recognition engine supports a wide variety of languages for the Neural Machine Translation (NMT) model.
+
+These languages are specified within a recognition request using language code parameters as noted on this page. Most language code parameters conform to ISO-639 identifiers, except where noted.
+
+Translations from any language to any language in this list are supported. Romanization and transliteration are supported only on the Cloud Translation - Advanced API. The list is updated as new languages are added. You can also list the supported languages by using Cloud Translation - Basic or Cloud Translation - Advanced APIs.
+

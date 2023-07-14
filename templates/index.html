@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Language Translator</title>
+    <style>
+        @font-face {
+            font-family: "Forque";
+            src: url("../static/fonts/Forque.ttf") format("Truetype");
+        }
+        body {
+            color: white;
+            background-color: #0E1E2B;
+            font-family: Arial;
+            font-size: 20;
+            width: 900px;
+            height: 350px;
+            margin: 0 auto;
+        }
+
+        .container-grid {
+            background-color: #010305;
+            padding: 20px;
+            width: 860px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: 10px;
+            border-radius: 20px;
+        }
+
+        .translated-box {
+            margin-top: 5px;
+            border: 2px solid white;
+            padding: 10px;
+            height: 200px;
+            width: 400px;
+            background-color: #0E1E2B;
+            color: white;
+            border-radius: 20px;
+        }
+        .textbox{
+            border: 2px solid white;
+            margin-top: 27.5px;            
+            padding: 10px;
+            width: 400px;
+            height: 200px;
+            background-color: #0E1E2B;
+            color: white;
+            border-radius: 20px;
+        }
+        select, input{
+            background-color: #66D7EB;
+            color: #0E1E2B;
+            width: 100px;
+            height: 22px;
+            border: 1px solid #3E849E;
+            text-align: center;
+            border-radius: 20px;
+            margin-left: 70px;
+        }
+        h1{
+            text-align: center;
+            font-family: "Forque";
+            letter-spacing: 2px;
+            font-size: 40px;
+        }
+        p{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="/translate" method="post">
+        <h1>Language Translator</h1>
+        <div class="container-grid">
+            <section>
+                <textarea class="textbox" name="text" placeholder="Enter English text" wrap="soft">{{ text }}</textarea>
+            </section>
+            <section>
+                <select name="target_lang" id="target_lang">
+                    <!-- Ensure the name attribute is set to "target_lang" -->
+                    <option value="ja" {% if target_lang == 'ja' %}selected{% endif %}>Japanese</option>
+                    <option value="es" {% if target_lang == 'es' %}selected{% endif %}>Spanish</option>
+                    <option value="fr" {% if target_lang == 'fr' %}selected{% endif %}>French</option>
+                    <option value="de" {% if target_lang == 'de' %}selected{% endif %}>German</option>
+                    <option value="ko" {% if target_lang == 'ko' %}selected{% endif %}>Korean</option>
+                    <option value="fil" {% if target_lang == 'fil' %}selected{% endif %}>Filipino</option>
+                </select>
+                <input type="submit" value="Translate">
+                <div class="translated-box">
+                    {% if translated %}
+                    <p>{{ translated }}</p>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </form>
+
+    <script>
+        // Get the select element
+        var selectElement = document.getElementById("target_lang");
+
+        // Check if a value is stored in local storage
+        var storedValue = localStorage.getItem("selectedLang");
+
+        // Set the selected option based on the stored value
+        if (storedValue) {
+            selectElement.value = storedValue;
+        }
+
+        // Add an event listener to the select element
+        selectElement.addEventListener("change", function() {
+            // Store the selected value in local storage
+            localStorage.setItem("selectedLang", selectElement.value);
+        });
+    </script>
+</body>
+</html>
